@@ -45,8 +45,6 @@ TSharedRef< FSlateStyleSet > FBulkRenamerStyle::Create()
 	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet("BulkRenamerStyle"));
 	Style->SetContentRoot(IPluginManager::Get().FindPlugin("BulkRenamer")->GetBaseDir() / TEXT("Resources"));
 
-	Style->Set("BulkRenamer.OpenPluginWindow", new IMAGE_BRUSH(TEXT("ButtonIcon_40x"), Icon40x40));
-
 	return Style;
 }
 

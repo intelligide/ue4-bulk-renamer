@@ -6,7 +6,7 @@
 
 void FBulkRenamerCommands::RegisterCommands()
 {
-	UI_COMMAND(OpenPluginWindow, "Bulk rename", "Bring up BulkRenamer window", EUserInterfaceActionType::Button, FInputGesture());
+	UI_COMMAND(OpenBulkRenamerWindow, "Bulk Rename", "Bring up BulkRenamer window", EUserInterfaceActionType::Button, FInputGesture());
 }
 
 #undef LOCTEXT_NAMESPACE

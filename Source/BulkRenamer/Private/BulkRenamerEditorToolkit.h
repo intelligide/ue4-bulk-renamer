@@ -51,7 +51,7 @@ private:
 	void Initialize(const EToolkitMode::Type Mode, const TSharedPtr< class IToolkitHost >& InitToolkitHost, const TArray<UObject*>& ObjectsToEdit);
 
 	TSharedRef<SDockTab> SpawnTab_AssetTable(const FSpawnTabArgs& Args);
-	TSharedRef<SDockTab> SpawnTab_MethodList(const FSpawnTabArgs& Args);
+	TSharedRef<SDockTab> SpawnTab_RuleList(const FSpawnTabArgs& Args);
 	
 	static const FName ToolkitFName;
 	static const FName ApplicationId;

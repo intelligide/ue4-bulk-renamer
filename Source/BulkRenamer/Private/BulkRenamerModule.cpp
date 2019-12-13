@@ -25,7 +25,7 @@ void FBulkRenamerModule::StartupModule()
 	PluginCommands = MakeShareable(new FUICommandList);
 
 	PluginCommands->MapAction(
-		FBulkRenamerCommands::Get().OpenPluginWindow,
+		FBulkRenamerCommands::Get().OpenBulkRenamerWindow,
 		FExecuteAction::CreateRaw(this, &FBulkRenamerModule::PluginButtonClicked),
 		FCanExecuteAction());
 			
@@ -66,14 +66,14 @@ TSharedRef<FExtender> FBulkRenamerModule::OnContentBrowserContextMenu(const TArr
 {
 	SelectedAssets = Assets;
 	TSharedPtr<FExtender> MenuExtender = MakeShareable(new FExtender());
-	MenuExtender->AddMenuExtension("CommonAssetActions", EExtensionHook::After, PluginCommands,
+	MenuExtender->AddMenuExtension("AssetContextAdvancedActions", EExtensionHook::After, PluginCommands,
 		FMenuExtensionDelegate::CreateRaw(this, &FBulkRenamerModule::AddContentBrowserMenuExtension));
 	return MenuExtender.ToSharedRef();
 }
 
 void FBulkRenamerModule::AddContentBrowserMenuExtension(FMenuBuilder& MenuBuilder)
 {
-	MenuBuilder.AddMenuEntry(FBulkRenamerCommands::Get().OpenPluginWindow);
+	MenuBuilder.AddMenuEntry(FBulkRenamerCommands::Get().OpenBulkRenamerWindow);
 }
 
 #undef LOCTEXT_NAMESPACE

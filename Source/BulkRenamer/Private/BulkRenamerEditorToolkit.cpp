@@ -9,7 +9,7 @@
 #include "AssetToolsModule.h"
 #include "SAssetTable.h"
 
-#define LOCTEXT_NAMESPACE "BulkRenamerEditorToolkit"
+#define LOCTEXT_NAMESPACE "BulkRenamer"
 
 class FAssetToolsModule;
 const FName FBulkRenamerEditorToolkit::ToolkitFName(TEXT("BulkRenamerEditor"));
@@ -28,7 +28,7 @@ void FBulkRenamerEditorToolkit::RegisterTabSpawners(const TSharedRef<FTabManager
 		.SetGroup(WorkspaceMenuCategory.ToSharedRef())
 		.SetIcon(FSlateIcon(FEditorStyle::GetStyleSetName(), "LevelEditor.Tabs.Viewports"));
 
-	InTabManager->RegisterTabSpawner(MethodListTabId, FOnSpawnTab::CreateSP(this, &FBulkRenamerEditorToolkit::SpawnTab_MethodList))
+	InTabManager->RegisterTabSpawner(MethodListTabId, FOnSpawnTab::CreateSP(this, &FBulkRenamerEditorToolkit::SpawnTab_RuleList))
 		.SetDisplayName(LOCTEXT("PropertiesTab", "Details"))
 		.SetGroup(WorkspaceMenuCategory.ToSharedRef())
 		.SetIcon(FSlateIcon(FEditorStyle::GetStyleSetName(), "PropertyEditor.Grid.TabIcon"));
@@ -100,7 +100,7 @@ FText FBulkRenamerEditorToolkit::GetToolkitName() const
 		FFormatNamedArguments Args;
 		Args.Add(TEXT("NumberOfObjects"), EditingObjs.Num());
 		Args.Add(TEXT("ClassName"), FText::FromString(SharedBaseClass->GetName()));
-		return FText::Format(LOCTEXT("ToolkitName_MultiObject", "{NumberOfObjects} {ClassName} Objects - Property Matrix Editor"), Args);
+		return FText::Format(LOCTEXT("ToolkitName_MultiObject", "{NumberOfObjects} {ClassName} Objects - Bulk Renamer"), Args);
 	}
 }
 
@@ -150,7 +150,7 @@ FText FBulkRenamerEditorToolkit::GetToolkitToolTipText() const
 		FFormatNamedArguments Args;
 		Args.Add(TEXT("NumberOfObjects"), NumEditingObjects);
 		Args.Add(TEXT("ClassName"), FText::FromString(SharedBaseClass->GetName()));
-		return FText::Format(LOCTEXT("ToolkitName_MultiObjectToolTip", "{NumberOfObjects} {ClassName} Objects - Property Matrix Editor"), Args);
+		return FText::Format(LOCTEXT("ToolkitName_MultiObjectToolTip", "{NumberOfObjects} {ClassName} Objects - Bulk Renamer"), Args);
 	}
 }
 
@@ -217,7 +217,7 @@ TArray<FFactoryItem> FindFactories()
 	return Factories;
 }
 
-TSharedRef<SDockTab> FBulkRenamerEditorToolkit::SpawnTab_MethodList(const FSpawnTabArgs& Args)
+TSharedRef<SDockTab> FBulkRenamerEditorToolkit::SpawnTab_RuleList(const FSpawnTabArgs& Args)
 {
 	check(Args.GetTabId() == MethodListTabId);
 
@@ -266,7 +266,7 @@ TSharedRef<SDockTab> FBulkRenamerEditorToolkit::SpawnTab_MethodList(const FSpawn
 						[
 							SNew(STextBlock)
 							.TextStyle(FEditorStyle::Get(), "ContentBrowser.TopBar.Font")
-							.Text(LOCTEXT("NewButton", "Add New"))
+							.Text(LOCTEXT("NewButton", "Add New Rule"))
 						]
 
 						// Down Arrow

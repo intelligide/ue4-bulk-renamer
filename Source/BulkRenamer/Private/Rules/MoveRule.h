@@ -12,13 +12,13 @@ class UMoveRule : public UBulkRenamingRule
 	GENERATED_BODY()
 public:
 	UPROPERTY(EditAnywhere)
-	int32 From;
+	uint32 From;
 
 	UPROPERTY(EditAnywhere)
-	int32 Count = 0;
+	uint32 Count = 0;
 
 	UPROPERTY(EditAnywhere)
-	int32 To = 0;
+	uint32 To = 0;
 
 	UPROPERTY(EditAnywhere)
 	bool Backward = false;
