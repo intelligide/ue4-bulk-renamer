@@ -1,8 +1,8 @@
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #include "RuleProfileManager.h"
-#include "FileManagerGeneric.h"
-#include "FileHelper.h"
+#include "HAL/FileManagerGeneric.h"
+#include "Misc/FileHelper.h"
 #include "JsonObjectConverter.h"
 
 FRuleProfileManager::FRuleProfileManager()
@@ -47,7 +47,7 @@ void FRuleProfileManager::Add(const FString& InName, const TArray<UBulkRenamingR
 
 		Profiles.Add(InName, Profile);
 
-		
+
 
 		FString Content;
 		if (FJsonObjectConverter::UStructToJsonObjectString(Profile, Content, 0, 0, 4, nullptr, true))

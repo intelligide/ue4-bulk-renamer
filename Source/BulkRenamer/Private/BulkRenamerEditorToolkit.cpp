@@ -2,12 +2,13 @@
 
 #include "BulkRenamerEditorToolkit.h"
 #include "EditorStyle.h"
-#include "SDockTab.h"
+#include "Widgets/Docking/SDockTab.h"
 #include "PropertyEditorModule.h"
 #include "BulkRenamingRuleFactory.h"
 #include "IAssetTools.h"
 #include "AssetToolsModule.h"
 #include "SAssetTable.h"
+#include "Subsystems/AssetEditorSubsystem.h"
 
 #define LOCTEXT_NAMESPACE "BulkRenamer"
 
@@ -355,7 +356,7 @@ void FBulkRenamerEditorToolkit::Initialize(const EToolkitMode::Type Mode, const 
 		TSharedPtr<FAssetTableRowData> RowData = MakeShared<FAssetTableRowData>(Asset->GetName(), Asset->GetName(), Asset->GetPathName());
 		AssetTableRows.Add(RowData);
 	}
-	
+
 	const bool bCreateDefaultStandaloneMenu = true;
 	const bool bCreateDefaultToolbar = false;
 	FAssetEditorToolkit::InitAssetEditor(Mode, InitToolkitHost, ApplicationId, StandaloneDefaultLayout, bCreateDefaultStandaloneMenu, bCreateDefaultToolbar, ObjectsToEdit);
@@ -364,7 +365,8 @@ void FBulkRenamerEditorToolkit::Initialize(const EToolkitMode::Type Mode, const 
 
 TSharedPtr<FBulkRenamerEditorToolkit> FBulkRenamerEditorToolkit::FindExistingEditor(UObject* Object)
 {
-	const TArray<IAssetEditorInstance*> Editors = FAssetEditorManager::Get().FindEditorsForAsset(Object);
+	UAssetEditorSubsystem* AssetEditorSubsystem = GEditor->GetEditorSubsystem<UAssetEditorSubsystem>();
+	const TArray<IAssetEditorInstance*> Editors = AssetEditorSubsystem->FindEditorsForAsset(Object);
 
 	IAssetEditorInstance* const * ExistingInstance = Editors.FindByPredicate([&](IAssetEditorInstance* Editor) {
 		return Editor->GetEditorName() == ToolkitFName;
@@ -409,7 +411,7 @@ TSharedRef<FBulkRenamerEditorToolkit> FBulkRenamerEditorToolkit::CreateEditor(co
 			return ExistingEditor.ToSharedRef();
 		}
 	}
-	
+
 	TSharedRef<FBulkRenamerEditorToolkit> NewEditor(new FBulkRenamerEditorToolkit());
 	NewEditor->Initialize(Mode, InitToolkitHost, ObjectsToEdit);
 
@@ -435,7 +437,7 @@ FReply FBulkRenamerEditorToolkit::Run()
 			CloseWindow();
 		}
 	}
-	
+
 	return FReply::Handled();
 }
 

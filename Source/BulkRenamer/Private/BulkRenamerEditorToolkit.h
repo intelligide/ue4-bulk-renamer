@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Toolkits/AssetEditorToolkit.h"
-#include "STableRow.h"
-#include "SScrollBox.h"
+#include "Widgets/Views/STableRow.h"
+#include "Widgets/Layout/SScrollBox.h"
 #include "BulkRenamingRule.h"
 #include "SAssetTable.h"
 #include "SRuleList.h"
@@ -30,7 +30,7 @@ public:
 	virtual FText GetToolkitToolTipText() const override;
 
 	FLinearColor GetWorldCentricTabColorScale() const override;
-	
+
 	FString GetWorldCentricTabPrefix() const override;
 
 	virtual bool IsPrimaryEditor() const override { return false; };
@@ -43,16 +43,16 @@ private:
 	FReply Run();
 	FString ApplyRules(FString str);
 	void OnRulesChanged();
-	
+
 	TSharedRef<SWidget> MakeRulesMenu();
-	
+
 	static TSharedPtr<FBulkRenamerEditorToolkit> FindExistingEditor(UObject* Object);
 
 	void Initialize(const EToolkitMode::Type Mode, const TSharedPtr< class IToolkitHost >& InitToolkitHost, const TArray<UObject*>& ObjectsToEdit);
 
 	TSharedRef<SDockTab> SpawnTab_AssetTable(const FSpawnTabArgs& Args);
 	TSharedRef<SDockTab> SpawnTab_RuleList(const FSpawnTabArgs& Args);
-	
+
 	static const FName ToolkitFName;
 	static const FName ApplicationId;
 	static const FName AssetTableId;

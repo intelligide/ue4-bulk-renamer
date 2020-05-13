@@ -3,12 +3,12 @@
 #include "SRuleList.h"
 #include "SAssetTable.h"
 #include "PropertyEditorModule.h"
-#include "ModuleManager.h"
+#include "Modules/ModuleManager.h"
 
 void SRuleList::Construct(const FArguments& InArgs)
 {
 	ModifiedDelegate = InArgs._OnModified;
-	
+
 	ChildSlot
 	[
 		SAssignNew(RulesBox, SScrollBox)
@@ -22,7 +22,7 @@ void SRuleList::AddRule(UBulkRenamingRule* Rule)
 	FPropertyEditorModule& PropertyEditorModule = FModuleManager::GetModuleChecked<FPropertyEditorModule>("PropertyEditor");
 	const FDetailsViewArgs DetailsViewArgs(false, false, false, FDetailsViewArgs::HideNameArea, false, nullptr, false, NAME_None);
 	TSharedPtr<class IDetailsView> DetailsView = PropertyEditorModule.CreateDetailView(DetailsViewArgs);
-	
+
 	DetailsView->SetObject(Rule, true);
 
 	DetailsView->OnFinishedChangingProperties().AddRaw(this, &SRuleList::OnRuleChanged);

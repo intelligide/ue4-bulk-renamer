@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "STableRow.h"
-#include "SScrollBox.h"
+#include "Widgets/Views/STableRow.h"
+#include "Widgets/Layout/SScrollBox.h"
 
 struct FAssetTableRowData
 {
@@ -27,7 +27,7 @@ public:
 	static const FName ColumnID_Filename;
 	static const FName ColumnID_NewFilename;
 	static const FName ColumnID_AssetPath;
-	
+
 	SLATE_BEGIN_ARGS(SAssetTable) {}
 	SLATE_END_ARGS()
 

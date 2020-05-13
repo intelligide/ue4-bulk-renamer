@@ -9,26 +9,26 @@
 #include "Widgets/Text/STextBlock.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
 #include "ContentBrowserModule.h"
-#include "SHeaderRow.h"
-#include "SListView.h" 
+#include "Widgets/Views/SHeaderRow.h"
+#include "Widgets/Views/SListView.h"
 #include "BulkRenamerEditorToolkit.h"
 
 #define LOCTEXT_NAMESPACE "FBulkRenamerModule"
 
 void FBulkRenamerModule::StartupModule()
-{	
+{
 	FBulkRenamerStyle::Initialize();
 	FBulkRenamerStyle::ReloadTextures();
 
 	FBulkRenamerCommands::Register();
-	
+
 	PluginCommands = MakeShareable(new FUICommandList);
 
 	PluginCommands->MapAction(
 		FBulkRenamerCommands::Get().OpenBulkRenamerWindow,
 		FExecuteAction::CreateRaw(this, &FBulkRenamerModule::PluginButtonClicked),
 		FCanExecuteAction());
-			
+
 	{
 		FContentBrowserModule& ContentBrowserModule = FModuleManager::LoadModuleChecked<FContentBrowserModule>(TEXT("ContentBrowser"));
 		TArray<FContentBrowserMenuExtender_SelectedAssets>& MenuExtenderDelegates = ContentBrowserModule.GetAllAssetViewContextMenuExtenders();
@@ -59,7 +59,7 @@ void FBulkRenamerModule::PluginButtonClicked()
 	if (AssetsToEdit.Num() > 0)
 	{
 		FBulkRenamerEditorToolkit::CreateEditor(EToolkitMode::Standalone, TSharedPtr<IToolkitHost>(), AssetsToEdit);
-	}	
+	}
 }
 
 TSharedRef<FExtender> FBulkRenamerModule::OnContentBrowserContextMenu(const TArray<struct FAssetData>& Assets)
@@ -77,5 +77,5 @@ void FBulkRenamerModule::AddContentBrowserMenuExtension(FMenuBuilder& MenuBuilde
 }
 
 #undef LOCTEXT_NAMESPACE
-	
+
 IMPLEMENT_MODULE(FBulkRenamerModule, BulkRenamer)
