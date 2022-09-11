@@ -2,6 +2,10 @@
 
 Unreal Engine 4 plug-in that adds a way to rename multiple assets.
 
+<hr>
+This plugin is no longer maintained and updated. A new and more complete tool is available in the repository [FrozenStormInteractive/Unreal-Batch-Rename-Tool](https://github.com/FrozenStormInteractive/Unreal-Batch-Rename-Tool).
+<hr>
+
 ![Screenshot](Docs/screenshot.png)
 
 ## Supported Platforms
